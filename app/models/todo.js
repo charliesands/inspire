@@ -3,5 +3,6 @@ export default class Todo {
     this.description = data.description
     this.completed = data.completed
     this.user = data.user
+    this._id = data._id
   }
 }
