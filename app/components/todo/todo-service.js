@@ -1,7 +1,9 @@
+import Todo from "../../models/todo.js"
 
 
+//@ts-ignore
 const todoApi = axios.create({
-	baseURL: 'https://bcw-sandbox.herokuapp.com/api/YOURNAME/todos/',
+	baseURL: 'https://bcw-sandbox.herokuapp.com/api/Charlie/todos/',
 	timeout: 3000
 });
 
@@ -18,17 +20,27 @@ export default class TodoService {
 		console.log("Getting the Todo List")
 		todoApi.get('')
 			.then((res) => { // <-- WHY IS THIS IMPORTANT????
-
+				console.log(res.data)
+				let todos = res.data.data.map(rawTodo => {
+					return new Todo(rawTodo)
+				})
+				draw(todos)
 			})
 			.catch(logError)
 	}
 
-	addTodo(todo) {
+	addTodo(todo, draw) {
 		// WHAT IS THIS FOR???
+		let newTodo = new Todo({
+			descriptiion: todo.description,
+			completed: todo.completed,
+			user: todo.user
+		})
 		todoApi.post('', todo)
 			.then(function (res) { // <-- WHAT DO YOU DO AFTER CREATING A NEW TODO?
-
+				draw(newTodo)
 			})
+
 			.catch(logError)
 	}
 
