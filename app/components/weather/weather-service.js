@@ -19,6 +19,7 @@ export default class WeatherService {
 			// res.data.temp is the temperature in Kelvin
 			// You should probably convert the temperature data to either F or C
 			callWhenDone(res.data);
+			console.log(res)
 		})
 	}
 }
