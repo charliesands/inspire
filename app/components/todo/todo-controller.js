@@ -20,15 +20,17 @@ function draw(todos) {
     if (todo.completed) {
 
       template += `
-      <div>${todo.description} <button onclick="app.controllers.todoController.removeTodo('${todo._id}')"type="submit">Delete</button> 
+        <div>
       <input type="checkbox" id="todo-check" name="todo-list-check" value="todo" onchange="app.controllers.todoController.toggleTodoStatus('${todo._id}')" checked />
+      ${todo.description} <i class="fas fa-trash" onclick="app.controllers.todoController.removeTodo('${todo._id}')"type="submit"></i> 
       
       </div>
       `
     } else {
       template += `
-      <div>${todo.description} <button onclick="app.controllers.todoController.removeTodo('${todo._id}')"type="submit">Delete</button> 
+      <div>
       <input type="checkbox" id="todo-check" name="todo-list-check" value="todo" onchange="app.controllers.todoController.toggleTodoStatus('${todo._id}')" />
+      ${todo.description} <i class="fas fa-trash" onclick="app.controllers.todoController.removeTodo('${todo._id}')"type="submit"></i> 
       
       </div>
             `
@@ -37,8 +39,8 @@ function draw(todos) {
   template += `
     <form onsubmit="app.controllers.todoController.addTodoFromForm(event)">
       <label for="TODO"></label>
-      <input type="text" name="todo" placeholder="New Todo" required>
-      <button type="submit">Add Todo</button>
+      <input type="text" name="todo" placeholder="New To do" required>
+      <button type="submit">Add To do</button>
 
     </form>`
   document.getElementById('todo').innerHTML = template
