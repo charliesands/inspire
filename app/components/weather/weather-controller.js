@@ -5,7 +5,7 @@ var weatherService = new WeatherService()
 function drawWeather(data) {
 	let f = (((data.main.temp - 273.15) * 1.8) + 32).toFixed(0)
 	document.getElementById('weather').innerHTML = `
-	${f}
+	${f}&#8457;
 `
 }
 

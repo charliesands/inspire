@@ -6,8 +6,8 @@ function drawQuote(data) {
 
 	document.getElementById('quote').innerHTML = `
 <blockquote class="blockquote text-center">
-  <p class="mb-0">${data.quote}</p>
-  <footer class="blockquote-footer"><cite title="Source Title">${data.author}</cite></footer>
+  <p id="quote-hover" class="mb-0">${data.quote}</p>
+  <footer id="author" class="blockquote-footer"><cite title="Source Title">${data.author}</cite></footer>
 </blockquote>
 `
 }

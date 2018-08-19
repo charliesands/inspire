@@ -13,17 +13,34 @@ function getTodos() {
 function draw(todos) {
   //WHAT IS MY PURPOSE?
   //BUILD YOUR TODO TEMPLATE HERE
-  var template = ''
+  let todoNum = todos.length
+  var template = `<div>${todoNum} to do</div>`
   for (let i = 0; i < todos.length; i++) {
     const todo = todos[i];
+    if (todo.completed) {
 
-    template += `
-    <div>${todo.description} <button onclick="app.controllers.todoController.removeTodo('${todo._id}')"type="submit">Delete</button> 
-    <input type="checkbox" id="todo-check" name="todo-list-check" value="todo" onchange="app.controllers.todoController.toggleTodoStatus('${todo._id}')" />
-        
-    </div>
-    `
+      template += `
+      <div>${todo.description} <button onclick="app.controllers.todoController.removeTodo('${todo._id}')"type="submit">Delete</button> 
+      <input type="checkbox" id="todo-check" name="todo-list-check" value="todo" onchange="app.controllers.todoController.toggleTodoStatus('${todo._id}')" checked />
+      
+      </div>
+      `
+    } else {
+      template += `
+      <div>${todo.description} <button onclick="app.controllers.todoController.removeTodo('${todo._id}')"type="submit">Delete</button> 
+      <input type="checkbox" id="todo-check" name="todo-list-check" value="todo" onchange="app.controllers.todoController.toggleTodoStatus('${todo._id}')" />
+      
+      </div>
+            `
+    }
   }
+  template += `
+    <form onsubmit="app.controllers.todoController.addTodoFromForm(event)">
+      <label for="TODO"></label>
+      <input type="text" name="todo" placeholder="New Todo" required>
+      <button type="submit">Add Todo</button>
+
+    </form>`
   document.getElementById('todo').innerHTML = template
 }
 //DONT FORGET TO LOOP
@@ -42,9 +59,7 @@ export default class TodoController {
   // toggleTodoStatus takes in a todo marks its status as completed and puts it to the server
   // removeTodo takes in a todoId and sends a delete request to the server
   // **** HINT: Everytime you make a change to any todo don't forget to get the todo list again
-  test() {
-    console.log(index)
-  }
+
 
   addTodoFromForm(e) {
 
@@ -72,10 +87,8 @@ export default class TodoController {
   }
 
   removeTodo(todoId) {
-    debugger
     // ask the service to run the remove todo with this id
     todoService.removeTodo(todoId, draw)
-
     // ^^^^ THIS LINE OF CODE PROBABLY LOOKS VERY SIMILAR TO THE toggleTodoStatus
   }
 
